@@ -26,8 +26,14 @@ Node.js is an open-source, cross-platform runtime environment that allows develo
 ---
 
 ## Your First Node.js Application
-1. Create a file named `app.js`.
-2. Add the following code:
+1. Create Folder with name of your `app_name/project_name`.
+    ```cmd
+    mkdir <app_name>
+    ```
+2. Go to that directory `cd <app_name>`.
+3. Initialize node and npm init by cmd `npm init -y`.
+4. Create a file named `app.js`.
+5. Add the following code:
    ```javascript
    // app.js
    const http = require('http');
@@ -38,15 +44,15 @@ Node.js is an open-source, cross-platform runtime environment that allows develo
      res.end('Hello, World!\n');
    });
 
-   server.listen(3000, () => {
-     console.log('Server running at http://localhost:3000/');
+   server.listen(`[PORT]`, () => {
+     console.log('Server running at http://localhost:[PORT]/');
    });
    ```
-3. Run the application:
+6. Run the application:
    ```bash
    node app.js
    ```
-4. Open your browser and navigate to `http://localhost:3000` to see your app in action.
+7. Open your browser and navigate to `http://localhost:[PORT]` to see your app in action.
 
 ---
 

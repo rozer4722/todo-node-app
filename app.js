@@ -43,8 +43,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// app.listen(4033, ()=>{
-//   console.log("Server is running on the port 4033");
-// })
-export default app
+app.listen(4033, ()=>{
+  console.log("Server is running on the port 4033");
+})
+// export default app
 // module.exports = app;

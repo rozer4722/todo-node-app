@@ -19,7 +19,7 @@ const addTodo = (req, res) => {
  */
 const deleteTodo = (req, res) => {
   try {
-    const {} = req.body;
+    const {title, description} = req.body;
   } catch (error) {
     
   }
