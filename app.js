@@ -6,10 +6,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/getmyapi", (req,res)=>{
-  req.send({
+  res.send({
     "message": "The success api fetch"
     "data":[]
-  }
+  })
 });
 
 app.listen(4033, ()=>{
