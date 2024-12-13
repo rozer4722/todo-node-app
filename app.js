@@ -21,6 +21,13 @@ app.use(cookieParser());
 app.use('/todo', todoRouter);
 app.use('/users', usersRouter);
 
+app.get("/getmyapi", (req,res)=>{
+  req.send({
+    "message": "The success api fetch"
+    "data":[]
+  }
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
