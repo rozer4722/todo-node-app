@@ -1,16 +1,26 @@
-// var express = require('express');
 import { Router } from "express";
-// import {
-//   addTodo,
-//   deleteTodo,
-//   updateTodo,
-//   getTodo,
-// } from "../controllers/todo.controller";
+import {
+  addTodo,
+  deleteTodo,
+  updateTodo,
+  getTodo,
+  showTodo,
+} from "../controllers/todo.controller.js";
 const router = Router();
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.send("Ok");
+router.post("/create", function (req, res, next) {
+  addTodo(req, res);
+});
+router.get("/all", function (req, res, next) {
+  getTodo(req, res);
+});
+router.get("/all/:id", function (req, res, next) {
+  showTodo(req, res);
+});
+router.delete("/:id", function (req, res, next) {
+  deleteTodo(req, res)
+});
+router.patch("/:id", function (req, res, next) {
+  updateTodo(req, res)
 });
 export default router;
-// module.exports = router;

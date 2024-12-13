@@ -1,6 +1,4 @@
-// import createHttpError from "http-errors";
 import express from "express"
-// import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import todoRouter from "./routes/todo.routes.js";
@@ -13,16 +11,12 @@ import usersRouter from "./routes/users.js";
 // var cookieParser = require('cookie-parser');
 // var logger = require('morgan');
 
-// var todoRouter = require('./routes/todo.routes');
-// var usersRouter = require('./routes/users');
-
 const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/todo', todoRouter);
 app.use('/users', usersRouter);
@@ -46,5 +40,4 @@ app.use(function(err, req, res, next) {
 app.listen(4033, ()=>{
   console.log("Server is running on the port 4033");
 })
-// export default app
-// module.exports = app;
+export default app

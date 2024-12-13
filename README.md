@@ -26,14 +26,8 @@ Node.js is an open-source, cross-platform runtime environment that allows develo
 ---
 
 ## Your First Node.js Application
-1. Create Folder with name of your `app_name/project_name`.
-    ```cmd
-    mkdir <app_name>
-    ```
-2. Go to that directory `cd <app_name>`.
-3. Initialize node and npm init by cmd `npm init -y`.
-4. Create a file named `app.js`.
-5. Add the following code:
+1. Create a file named `app.js`.
+2. Add the following code:
    ```javascript
    // app.js
    const http = require('http');
@@ -44,15 +38,15 @@ Node.js is an open-source, cross-platform runtime environment that allows develo
      res.end('Hello, World!\n');
    });
 
-   server.listen(`[PORT]`, () => {
-     console.log('Server running at http://localhost:[PORT]/');
+   server.listen(3000, () => {
+     console.log('Server running at http://localhost:3000/');
    });
    ```
-6. Run the application:
+3. Run the application:
    ```bash
    node app.js
    ```
-7. Open your browser and navigate to `http://localhost:[PORT]` to see your app in action.
+4. Open your browser and navigate to `http://localhost:3000` to see your app in action.
 
 ---
 
@@ -168,6 +162,84 @@ npm list
 
 ---
 
+## Creating a Todo App with Express.js
+
+### Step 1: Setup
+1. Initialize a new project and install required dependencies:
+   ```bash
+   npm init -y
+   npm install express body-parser
+   ```
+
+2. Create a file named `todoApp.js`.
+
+### Step 2: Basic Todo App Code
+```javascript
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+
+let todos = []; // In-memory storage for todos
+
+// Get all todos
+app.get('/todos', (req, res) => {
+  res.json(todos);
+});
+
+// Add a new todo
+app.post('/todos', (req, res) => {
+  const { task } = req.body;
+  if (task) {
+    const newTodo = { id: Date.now(), task, completed: false };
+    todos.push(newTodo);
+    res.status(201).json(newTodo);
+  } else {
+    res.status(400).json({ error: 'Task is required' });
+  }
+});
+
+// Update a todo's completion status
+app.put('/todos/:id', (req, res) => {
+  const { id } = req.params;
+  const todo = todos.find(t => t.id === parseInt(id));
+
+  if (todo) {
+    todo.completed = !todo.completed;
+    res.json(todo);
+  } else {
+    res.status(404).json({ error: 'Todo not found' });
+  }
+});
+
+// Delete a todo
+app.delete('/todos/:id', (req, res) => {
+  const { id } = req.params;
+  const initialLength = todos.length;
+  todos = todos.filter(t => t.id !== parseInt(id));
+
+  if (todos.length < initialLength) {
+    res.status(204).send();
+  } else {
+    res.status(404).json({ error: 'Todo not found' });
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Todo app is running on http://localhost:3000');
+});
+```
+
+### Step 3: Testing the API
+- Use tools like [Postman](https://www.postman.com/) or `curl` to test the API endpoints:
+  - **GET /todos**: Fetch all todos.
+  - **POST /todos**: Add a new todo by sending a JSON body: `{ "task": "Learn Node.js" }`.
+  - **PUT /todos/:id**: Toggle completion status of a todo.
+  - **DELETE /todos/:id**: Delete a specific todo by ID.
+
+---
+
 ## Debugging in Node.js
 1. Use `console.log()` for basic debugging.
 2. Use the built-in Node.js debugger:
@@ -185,4 +257,3 @@ npm list
 ## Conclusion
 Node.js is a powerful tool for building scalable, high-performance applications. With its vast ecosystem and active community, it enables developers to create everything from simple scripts to complex, enterprise-grade applications.
 
-# todo-node-app
